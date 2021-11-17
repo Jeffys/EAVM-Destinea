@@ -1,0 +1,156 @@
+<odoo>
+  <data>
+
+      <record id="vdl_product_template_form_view" model="ir.ui.view">
+            <field name="name">furniture product template form add</field>
+            <field name="model">product.template</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+
+                    <div name="options" position="replace">
+                      <div name="options" groups="base.group_user">
+                        <span class="d-inline-block">
+                            <field name="sale_ok"/>
+                            <label for="sale_ok"/>
+                        </span>
+                        <span class="d-inline-block">
+                            <field name="purchase_ok"/>
+                            <label for="purchase_ok"/>
+                        </span>
+                        <span class="d-inline-block">
+                            <field name="vdl"/>
+                            <label for="vdl"/>
+                        </span>
+                      </div>
+                    </div>
+
+             <page name="general_information" position="before">
+                        <page string="VDL" name="vdl_page" attrs="{'invisible':[('vdl','!=',True)]}">
+                          <group>
+                            <field name="owner_id"/>
+                          </group>
+                          <group>
+                            <group name="porteur" string="Porteur">
+                                <field name="porteur_id"/>
+                                <field name="model_porteur_id" context="{'porteur_id':porteur_id}"/> 
+                                <field name="serie_porteur"/>
+                            </group>
+                            <group name="cellule" string="Cellule">
+                                <field name="cellule_id"/>
+                                <field name="model_cellule_id" context="{'cellule_id':cellule_id}"/> 
+                                <field name="serie_cellule"/>
+                            </group>
+
+                            <group name="info1">
+                                <field name="annee_millesime"/>
+                                <field name="immatriculation"/>
+                                <field name="date_circulation"/> 
+                                <field name="date_next_CT"/>
+                            </group>
+                            <group name="info2">
+                                <field name="km"/>
+                                <field name="option_cellule"/> 
+                                <field name="accessoires"/>
+                                <field name="control_etancher_ids" widget="many2many_tags"/>
+                            </group>
+                           </group>
+                        </page>
+              </page>
+ 
+            </field>
+        </record>
+
+
+    <!-- Epmlacement views definition -->
+
+     <record model="ir.ui.view" id="porteur_list">
+      <field name="name">porteur</field>
+      <field name="model">porteur</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="porteur_form">
+      <field name="name">porteur</field>
+      <field name="model">porteur</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+              <group>
+                <field name="name"/>
+              </group>
+              <group>
+              </group>
+          </group>
+          <notebook>
+            <page string="Modèles">
+              <field name="model_porteur_ids" nolabel="1"/>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="model_porteur_list">
+      <field name="name">model_porteur</field>
+      <field name="model">model.porteur</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree editable='bottom'>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="cellule_list">
+      <field name="name">cellule</field>
+      <field name="model">cellule</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="cellule_form">
+      <field name="name">cellule</field>
+      <field name="model">cellule</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+              <group>
+                <field name="name"/>
+              </group>
+              <group>
+              </group>
+          </group>
+          <notebook>
+            <page string="Modèles">
+              <field name="model_cellule_ids" nolabel="1"/>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="model_cellule_list">
+      <field name="name">model_cellule</field>
+      <field name="model">model.cellule</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree editable='bottom'>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+  </data>
+</odoo>
