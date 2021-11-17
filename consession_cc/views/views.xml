@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="consession_cc.list">
+      <field name="name">ConsessionCC list</field>
+      <field name="model">consession_cc.consession_cc</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="consession_cc.action_window">
+      <field name="name">ConsessionCC window</field>
+      <field name="res_model">consession_cc.consession_cc</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="consession_cc.action_server">
+      <field name="name">ConsessionCC server</field>
+      <field name="model_id" ref="model_consession_cc_consession_cc"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="ConsessionCC" id="consession_cc.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="consession_cc.menu_1" parent="consession_cc.menu_root"/>
+    <menuitem name="Menu 2" id="consession_cc.menu_2" parent="consession_cc.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="consession_cc.menu_1_list" parent="consession_cc.menu_1"
+              action="consession_cc.action_window"/>
+    <menuitem name="Server to list" id="consession_cc" parent="consession_cc.menu_2"
+              action="consession_cc.action_server"/>
+-->
+  </data>
+</odoo>
