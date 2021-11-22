@@ -2,5 +2,5 @@
 
 from . import models
 from . import product
-from . import account_move
 from . import partner
+#from . import product_entreprise_accounting
