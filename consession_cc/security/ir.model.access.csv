@@ -1,6 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_porteur,porteur,model_porteur,base.group_user,1,1,1,1
 access_model_porteur,model_porteur,model_model_porteur,base.group_user,1,1,1,1
-access_cellule,cellule,model_cellule,base.group_user,1,1,1,1
-access_model_cellule,model_cellule,model_model_cellule,base.group_user,1,1,1,1
-access_control_etanche,control_etanche,model_control_etanche,base.group_user,1,1,1,1
+access_equipement_option_line,equipement_option_line,model_equipement_option_line,base.group_user,1,1,1,1
+access_equipement_serie,equipement_serie,model_equipement_serie,base.group_user,1,1,1,1
+access_garantie_line,garantie_line,model_garantie_line,base.group_user,1,1,1,1
+access_financement_line,financement_line,model_financement_line,base.group_user,1,1,1,1
+access_type_financement,type_financement,model_type_financement,base.group_user,1,1,1,1
+access_organisme_financement,organisme_financement,model_organisme_financement,base.group_user,1,1,1,1

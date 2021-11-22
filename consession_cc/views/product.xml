@@ -22,40 +22,165 @@
                             <field name="vdl"/>
                             <label for="vdl"/>
                         </span>
+                        <span class="d-inline-block" attrs="{'invisible':[('vdl','!=',True)]}"> 
+                            <field name="type_vdl_form"/>
+                        </span>
                       </div>
                     </div>
 
-             <page name="general_information" position="before">
-                        <page string="VDL" name="vdl_page" attrs="{'invisible':[('vdl','!=',True)]}">
-                          <group>
-                            <field name="owner_id"/>
-                          </group>
-                          <group>
-                            <group name="porteur" string="Porteur">
-                                <field name="porteur_id"/>
-                                <field name="model_porteur_id" context="{'porteur_id':porteur_id}"/> 
-                                <field name="serie_porteur"/>
+             <page name="general_information" position="after">
+
+                        <page string="Info véhicule" name="vdl_general_information" attrs="{'invisible':['|',('type_vdl_form','=','catalogue'),('vdl','=',False)]}">
+                            <group>
+                                <field name="owner_id"/>
                             </group>
-                            <group name="cellule" string="Cellule">
-                                <field name="cellule_id"/>
-                                <field name="model_cellule_id" context="{'cellule_id':cellule_id}"/> 
-                                <field name="serie_cellule"/>
+                                 <group name="info_vdl" col="1">
+                                    <group>
+                                    <group string="Série">
+                                      <field name="date_entree_stock"/>
+                                      <field name="num_serie"/>
+                                      <field name="num_serie_cellule"/>
+                                    </group>
+                                    <group string="Commentaires">
+                                      <field name="Commentaire_vdl" nolabel="1"/>
+                                    </group>
+                                    <group>
+                                      
+                                    </group>
+                                    </group> 
+                                    <group col="4" string="Immatriculation">
+                                      <field name="date_circulation"/>
+                                      <field name="premiere_main"/>
+                                      <field name="immatriculation"/>
+                                      <field name="date_immatriculation"/>
+                                    </group>
+                                    <group string="Kilométrage" col="6"> 
+                                      <field name="km"/>
+                                      <field name="date_km"/>
+                                      <field name="certifie_km"/>
+                                    </group> 
+                                    <group col="4" string="Contrôle">
+                                      <field name="num_cle"/>
+                                      <field name="num_police"/>
+                                      <field name="date_CT"/>
+                                      <field name="date_next_CT"/>
+                                      <field name="date_control_etanche"/>
+                                      <field name="date_next_control_etanche"/>
+                                    </group>
+                                  </group>
+                                 
+                        </page>
+                        <page string="Economie" name="fiche_economique" attrs="{'invisible':['|',('type_vdl_form','=','catalogue'),('vdl','=',False)]}">
+                          <group>
+
+                            <group string="Conditions d'achat">
+                              <field name="currency_id" invisible="1"/>
+                              <field name="standard_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                              <field name="cout_cession_interne" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                              <field name="cout_travaux_extérieur" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                              <field name="cout_accessoire_session" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                              <field name="cout_autre_session" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                              <field name="cout_reprise_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                           </group>
+
+                           <group col="1">
+                            <group string="Conditions de vente" col="1">
+                               <group>
+                                <label for="list_price" class="mt-1"/>
+                                <div>
+                                  <field name="list_price" widget="monetary" options="{'currency_field': 'currency_id'}"/> ->
+                                  <strong>
+                                  <span class="ml-2"/><field name="prix_vente_vdl_tax_included" string="TTC" widget="monetary" options="{'currency_field': 'currency_id'}"/>TTC</strong>
+                                </div>
+                              </group>
+
+                               <group>
+                                <label for="prix_vente_equipement" class="mt-1"/>
+                                <div>
+                                  <field name="prix_vente_equipement" widget="monetary" options="{'currency_field': 'currency_id'}"/> ->
+                                  <strong>
+                                  <span class="ml-2"/><field name="prix_vente_equipement_tax_included" string="TTC" widget="monetary" options="{'currency_field': 'currency_id'}"/>TTC</strong>
+                                </div>
+                              </group>
+
+                               <group>
+                                <label for="total_prix_vente" class="mt-1"/>
+                                <div>
+                                  <field name="total_prix_vente" widget="monetary" options="{'currency_field': 'currency_id'}"/> ->
+                                  <strong>
+                                  <span class="ml-2"/><field name="total_prix_vente_tax_included" string="TTC" widget="monetary" options="{'currency_field': 'currency_id'}"/>TTC</strong>
+                                </div>
+                              </group>
+
+                             </group>
+
+                              <group string="Marge">
+                                <field name="marge_vdl" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                              </group>
                             </group>
 
-                            <group name="info1">
-                                <field name="annee_millesime"/>
-                                <field name="immatriculation"/>
-                                <field name="date_circulation"/> 
-                                <field name="date_next_CT"/>
-                            </group>
-                            <group name="info2">
-                                <field name="km"/>
-                                <field name="option_cellule"/> 
-                                <field name="accessoires"/>
-                                <field name="control_etancher_ids" widget="many2many_tags"/>
-                            </group>
-                           </group>
+                          </group>
+                                 
                         </page>
+
+                        <page string="Fiche technique" name="vdl_page" attrs="{'invisible':[('vdl','=',False)]}">
+                           <group>
+                                <group name="cellule" string="Cellule">
+                                  <group>
+                                    <field name="type_mines"/>
+                                    <field name="couchage"/>
+                                    <field name="longueur"/>
+                                    <field name="largeur"/>
+                                    <field name="hauteur"/>
+                                  </group>
+                                  <group>
+                                    <field name="code_constructeur"/>
+                                    <field name="reservoir_eau_propre"/>
+                                    <field name="reservoir_eau_usee"/>
+                                    <field name="poids_vide"/>
+                                    <field name="charge_utile"/>
+                                  </group>
+                                </group>
+                                <group name="porteur" string="Porteur" col="1">
+                                  <group>
+                                    <field name="porteur_id"/>
+                                    <field name="model_porteur_id" context="{'porteur_id':porteur_id}"/>
+                                  </group>
+                                    <group col="4">
+                                      <field name="nb_place"/>
+                                      <field name="poids_tractable"/>
+                                    </group>
+                                  <group col="6">
+                                    <strong>P. FISCALE:</strong> <field name="puissance_fiscale" nolabel="1"/>
+                                    <strong>DIN:</strong> <field name="din" nolabel="1"/>
+                                    <strong>KW:</strong> <field name="kw" nolabel="1"/>
+                                  </group>
+                                </group>
+
+                            </group>
+                        </page>
+
+                        <page string="Equipements" name="equipement_page" attrs="{'invisible':[('vdl','!=',True)]}">
+                            <group>
+                                <field name="equipement_serie_ids" widget="many2many_tags"/>
+                            </group>
+                            <group name="equipement_option" string="Equipements en option">
+                              <field name="equipement_option_line_ids" nolabel="1"/>
+                            </group>
+                        </page>
+
+                        <page string="Autres" name="autre_page" attrs="{'invisible':[('vdl','!=',True)]}">
+                            <group name="garantie_group" string="Garanties">
+                              <field name="garantie_line_ids" nolabel="1"/>
+                            </group>
+
+                            <group name="financement_group" string="Financement/Leasing" attrs="{'invisible':[('type_vdl_form','=','catalogue')]}"> 
+                              <field name="financement_line_ids" nolabel="1"/>
+                            </group>
+
+                        </page>
+
+
               </page>
  
             </field>
@@ -98,7 +223,7 @@
     </record>
 
      <record model="ir.ui.view" id="model_porteur_list">
-      <field name="name">model_porteur</field>
+      <field name="name">model_porteur_view</field>
       <field name="model">model.porteur</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
@@ -108,46 +233,53 @@
       </field>
     </record>
 
-     <record model="ir.ui.view" id="cellule_list">
-      <field name="name">cellule</field>
-      <field name="model">cellule</field>
+     <record model="ir.ui.view" id="equipement_option_line_tree_view">
+      <field name="name">equipement_option_line_view</field>
+      <field name="model">equipement.option.line</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
+        <tree editable='bottom'>
+          <field name="equipement_id" domain="[('vdl','=',False)]"/>
+          <field name="quantite"/>
+          <field name="currency_id" invisible="1"/>
+          <field name="prix_revient" widget="monetary" sum='Total prix revient' options="{'currency_field': 'currency_id'}"/>
+          <field name="prix_vente" widget="monetary" sum='Total prix vente'  options="{'currency_field': 'currency_id'}"/>
+          <field name="prix_vente_tax_included" widget="monetary" sum='Total prix vente TTC'  options="{'currency_field': 'currency_id'}"/>
         </tree>
       </field>
     </record>
 
-    <record model="ir.ui.view" id="cellule_form">
-      <field name="name">cellule</field>
-      <field name="model">cellule</field>
-      <field name="type">form</field>
-      <field name="arch" type="xml">
-        <form>
-          <group>
-              <group>
-                <field name="name"/>
-              </group>
-              <group>
-              </group>
-          </group>
-          <notebook>
-            <page string="Modèles">
-              <field name="model_cellule_ids" nolabel="1"/>
-            </page>
-          </notebook>
-        </form>
-      </field>
-    </record>
-
-     <record model="ir.ui.view" id="model_cellule_list">
-      <field name="name">model_cellule</field>
-      <field name="model">model.cellule</field>
+     <record model="ir.ui.view" id="garantie_line_tree_view">
+      <field name="name">Garanties</field>
+      <field name="model">garantie.line</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
         <tree editable='bottom'>
           <field name="name"/>
+          <field name="quantite"/>
+          <field name="unite_garantie"/>
+          <field name="num_contrat"/>
+          <field name="kilometre"/>
+          <field name="debut"/>
+          <field name="fin"/>
+        </tree>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="financement_line_tree_view">
+      <field name="name">Financement</field>
+      <field name="model">financement.line</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree editable='bottom'>
+          <field name="type_financement_id"/>
+          <field name="organisme_financement_id"/>
+          <field name="num_contrat"/>
+          <field name="debut"/>
+          <field name="fin"/>
+          <field name="currency_id" invisible="1"/>
+          <field name="montant_credit" widget="monetary" options="{'currency_field': 'currency_id'}" />
+          <field name="montant_traite" widget="monetary" options="{'currency_field': 'currency_id'}" />
         </tree>
       </field>
     </record>
