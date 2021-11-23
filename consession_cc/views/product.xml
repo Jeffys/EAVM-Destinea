@@ -78,7 +78,7 @@
                               <field name="standard_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                               <field name="cout_cession_interne" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                               <field name="cout_travaux_extérieur" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                              <field name="cout_accessoire_session" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                              <field name="cout_accessoire" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                               <field name="cout_autre_session" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                               <field name="cout_reprise_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                            </group>
@@ -164,9 +164,8 @@
                             <group>
                                 <field name="equipement_serie_ids" widget="many2many_tags"/>
                             </group>
-                            <group name="equipement_option" string="Equipements en option">
-                              <field name="equipement_option_line_ids" nolabel="1"/>
-                            </group>
+                            <field name="equipement_option_line_ids" nolabel="1"/>
+
                         </page>
 
                         <page string="Autres" name="autre_page" attrs="{'invisible':[('vdl','!=',True)]}">
@@ -236,10 +235,10 @@
      <record model="ir.ui.view" id="equipement_option_line_tree_view">
       <field name="name">equipement_option_line_view</field>
       <field name="model">equipement.option.line</field>
-      <field name="type">tree</field>
+      <field name="type">tree</field> 
       <field name="arch" type="xml">
         <tree editable='bottom'>
-          <field name="equipement_id" domain="[('vdl','=',False)]"/>
+          <field name="equipement_id" domain="[('vdl','=',False)]" readonly="0" options="{'no_create_edit': False}"/> 
           <field name="quantite"/>
           <field name="currency_id" invisible="1"/>
           <field name="prix_revient" widget="monetary" sum='Total prix revient' options="{'currency_field': 'currency_id'}"/>

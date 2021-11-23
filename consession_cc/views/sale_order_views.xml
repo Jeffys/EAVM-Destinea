@@ -1,0 +1,33 @@
+<odoo>
+  <data>
+
+      <record id="vdl_sale_order_form_view" model="ir.ui.view">
+            <field name="name">Bon de commande pour vdl</field>
+            <field name="model">sale.order</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+              <page name="customer_signature" position="after">
+                <field name="is_vdl" invisible="1"/>
+                <page groups="base.group_no_one" string="Projet vente VDL" name="projet_vente_vdl" attrs="{'invisible': ['|',('is_vdl', '=', False),('signed_on', '=', False)]}">
+                  <group>
+                    <group>
+                      <field name="is_dossier_financement"/>
+                      <field name="is_reprise"/>
+                    </group>
+                    <group>
+                      <field name="vdl_en_stock"/>
+                      <field name="vdl_neuf"/>
+                    </group>
+                    <group>
+                      <button name="create_project" string="Créer un projet de vente" type="object" class="oe_highlight" attrs="{'invisible': [('project_id', '!=', False)]}"/>
+                      <field name="project_id" invisible="1"/>
+                    </group>
+                  </group>
+                </page>
+
+              </page>
+            </field>
+      </record>
+  </data>
+</odoo>
