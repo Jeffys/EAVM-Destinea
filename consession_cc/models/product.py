@@ -153,6 +153,12 @@ class ProductTemplate(models.Model):
 		result = {'domain': domain}
 		return result
 
+	def import_accessories(self):
+		list_accessoire = []
+		for equipement_line in self.equipement_option_line_ids:
+			list_accessoire.append(equipement_line.equipement_id.id)
+		self.optional_product_ids = [(6,0,list_accessoire)]
+
 
 class porteur(models.Model):
 	_name = 'porteur'

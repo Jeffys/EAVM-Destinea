@@ -27,6 +27,7 @@ class SaleOrder(models.Model):
 					break
 			obj.is_vdl = res
 
+
 	def create_project(self):
 
 		context = self._context
