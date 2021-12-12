@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
               <page name="customer_signature" position="after">
                 <field name="is_vdl" invisible="1"/>
-                <page groups="base.group_no_one" string="Projet vente VDL" name="projet_vente_vdl" attrs="{'invisible': ['|',('is_vdl', '=', False),('signed_on', '=', False)]}">
+                <page groups="base.group_no_one" string="Projet vente VDL" name="projet_vente_vdl" attrs="{'invisible': ['|',('is_vdl', '=', False),('state', '!=', 'sale')]}">
                   <group>
                     <group>
                       <field name="is_dossier_financement"/>
